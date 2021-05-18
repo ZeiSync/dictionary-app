@@ -1,0 +1,1 @@
+exports.expressInstance = require('./express.config');
