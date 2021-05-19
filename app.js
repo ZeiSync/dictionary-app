@@ -1,19 +1,14 @@
 require('dotenv').config()
-const express = require('express');
-const app = express();
-const port = 3000;
-const path = require('path');
-const cors = require('cors');
-const mongoose = require('mongoose');
-const { expressInstance } = require('./configs');
+
+const { mongoose, expressInstance } = require('./src/configs');
 
 mongoose
-	.connect("mongodb://localhost:27017/acmedb", { useNewUrlParser: true })
-	.then(() => {
-		const server = expressInstance.createApp();
-
-		server.listen(5000, () => {
-			console.log("Server has started!")
-		})
-	})
-  .catch(console.error);;
+  .connect()
+  .then(() => {
+    const port = process.env.PORT || 3002;
+    const server = expressInstance.createApp();
+    server.listen(port, () => {
+      console.log('Server is running on:', `http://localhost:${port} 🚀`);
+    });
+  })
+  .catch(console.error);

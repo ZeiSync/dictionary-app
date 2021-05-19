@@ -1,8 +1,9 @@
+const { mongoUri, nodeEnv } = require('./var');
 const mongoose = require('mongoose');
 
 exports.connect = async () => {
   try {
-    await mongoose.connect(process.env.MONGO_URI, {
+    await mongoose.connect(mongoUri, {
       useNewUrlParser: true,
       useCreateIndex: true,
       useUnifiedTopology: true,
@@ -11,7 +12,6 @@ exports.connect = async () => {
       mongoose.set('debug', true);
     }
     console.info('🍣 Mongoose is connected');
-    await initDefaultData();
   } catch (error) {
     console.error('DB Connection error: ', error);
     throw error;

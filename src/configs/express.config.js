@@ -1,3 +1,11 @@
+const express = require('express');
+const path = require('path');
+const cors = require('cors');
+const httpStatus = require('http-status');
+const passport = require('passport');
+
+const { adminStrategy } = require('./passport.config');
+
 const app = express();
 
 exports.createApp = () => {
@@ -11,8 +19,15 @@ exports.createApp = () => {
 
   app.use(cors());
 
-  app.use('/healthcheck', (req, res, next) => res.status(httpStatus.OK).end());
 
+  app.use(passport.initialize());
+  app.use(passport.session());
+
+  passport.use('admin', adminStrategy);
+
+  app.get('/', (_, res) => res.status(httpStatus.OK).json('OK'));
+
+  app.use('/healthcheck', (req, res, next) => res.status(httpStatus.OK).end());
 
   return app;
 };
