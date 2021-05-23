@@ -13,7 +13,7 @@ const meanSchema = new Schema({
     type: String,
     require: true,
   },
-  words: [{ type: Schema.Types.ObjectId, ref: 'Word' }]
+  word: { type: Schema.Types.ObjectId, ref: 'Word' }
 })
 
 

@@ -1,0 +1,28 @@
+extends ../layout.pug
+
+block content
+  form(method="POST" action="/admin/word").px-5
+    #modal-body
+      .mb-3
+        label.form-label(for='word') Word
+        input#word.form-control(type='text' name='word' required value=word.word)
+      .mb-3
+        label.form-label(for='pronounce') Pronounce
+        input#pronounce.form-control(type='text' name="pronounce" required value=word.pronounce)
+      .mb-3
+        label.form-label(for='wordType') Word Type
+        select#wordType.form-select(name="type" value=word.type)
+          option(value="nouns" selected) Nouns
+          option(value="verbs") Verbs
+          option(value="adjectives") Adjectives
+          option(value="adverbs") Adverbs
+          option(value="pronouns") Pronouns
+          option(value="prepositions") prepositions
+          option(value="conjunctions") Conjunctions
+          option(value="interjections") Interjections
+      .mb-3
+        label.form-label(for='category' value=word.category) Category
+        select#category.form-select(name="category")
+          option(value="secure" selected) Secure
+          option(value="it") IT
+      button#addMean.btn.btn-primary(type='button' onclick="addMoreMean()") Update

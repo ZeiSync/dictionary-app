@@ -2,29 +2,41 @@ const wordService = require('../services/word.service');
 
 exports.index = async (req, res, next) => {
   try {
-    const words = await wordService.getAll();
-
-    res.render('admin/word/index', { words });
+    const { query } = req.query;
+    const words = await wordService.getAll(query);
+    res.render('admin/word/index', { words, query });
   } catch (error) {
     next(error);
   }
 };
 
-exports.search = async (req, res, next) => {
+exports.addNewWord = async (req, res, next) => {
   try {
-    const { query } = req.query;
-    const words = await wordService.getAll(query);
-
-    res.render('admin/word/index', { words });
+    await wordService.addNewWord(req.body);
+    res.redirect('back');
   } catch (error) {
     next(error);
   }
 }
 
-exports.addNewWord = async (req, res, next) => {
+exports.delete = async (req, res, next) => {
   try {
-    console.log(req.body);
+    const { id } = req.params;
+    await wordService.delete(id);
     res.redirect('back');
+  } catch (error) {
+    next(error);
+  }
+}
+
+exports.getDetail = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const word = await wordService.getOne(id);
+
+    console.log(word);
+
+    res.render('admin/word/update', { word });
   } catch (error) {
     next(error);
   }
