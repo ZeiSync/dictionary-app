@@ -5,6 +5,6 @@ const router = require('express').Router();
 router.get('/', (_, res) => res.send('Ok'));
 
 router.use('/word', require('./word.route'));
-router.use('/home', require('./home.route'));
+router.use('/user', require('./user.route'));
 
 module.exports = router;

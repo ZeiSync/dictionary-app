@@ -10,6 +10,7 @@ const userSchema = new Schema(
     city: String,
     email: {
       type: String,
+      required: true,
       unique: true,
     },
     password: String,

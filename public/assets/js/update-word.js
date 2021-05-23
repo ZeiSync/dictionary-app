@@ -36,7 +36,6 @@ const deleteThisMean = (id) => {
     } else {
       alert('Can\'t remove the last mean');
     }
-
   } else {
     document.getElementById(id).remove();
   }

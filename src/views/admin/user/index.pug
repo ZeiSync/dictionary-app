@@ -1,0 +1,44 @@
+extends ../layout.pug
+
+block content
+  .px-2
+    .d-flex.mb-2.justify-content-end
+      form(action="/admin/user" method="GET").d-flex
+        input.form-control.me-2(type='search' placeholder='Search' aria-label='Search' name="query" value= query ? query : "" )
+        button.btn.btn-outline-success.my-2.my-sm-0(type='submit') Search
+
+    table.table.table-hover 
+      thead
+        tr
+          th.text-center(scope='col') Name
+          th.text-center(scope='col') Email
+          th.text-center(scope='col') Phone
+          th.text-center(scope='col') Action
+      tbody
+        if users && users.length
+          each user, i in users
+            tr
+              td.text-center 
+                | #{user.name}
+              td.text-center 
+                | #{user.email}
+              if user.phone
+                td.text-center
+                  | #{user.phone}
+              else
+                td.text-center
+                  | No Phone
+              td.text-center
+                .dropdown
+                  button.btn.btn-outline-secondary.dropdown-toggle(id="options"+i  type='button' data-bs-toggle='dropdown' aria-expanded='false')
+                    | Action
+                  ul.dropdown-menu(aria-labelledby="options"+i)
+                    li
+                      a.dropdown-item(href='/admin/user/'+user._id) Update
+                    li
+                      span.dropdown-item(onclick='deleteUser("'+ user._id +'")') Delete
+        else
+          tr.bg-light.bg-gradient
+            td.text-center(colspan='4') No data to show
+block script
+  script(src='/assets/js/user.js' type='text/javascript')

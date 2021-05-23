@@ -1,7 +1,6 @@
 const Word = require('../../models/word.model');
 const Mean = require('../../models/mean.model');
 const { getMp3Link } = require('../../utils/text-to-speech');
-const e = require('express');
 
 exports.getAll = async (option) => {
   try {
