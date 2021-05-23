@@ -43,9 +43,7 @@ block content
                     | Action
                   ul.dropdown-menu(aria-labelledby="options"+i)
                     li
-                      a.dropdown-item(href='/admin/word/'+word._id) Detail
-                    li
-                      a.dropdown-item(href='#') Update
+                      a.dropdown-item(href='/admin/word/'+word._id) Update
                     li
                       span.dropdown-item(onclick='deleteWord("'+ word._id +'")') Delete
         else
@@ -80,7 +78,7 @@ block content
               select#category.form-select(name="category")
                 option(value="secure" selected) Secure
                 option(value="it") IT
-            button#addMean.btn.btn-primary(type='button' onclick="addMoreMean()") Add
+            button#addMean.btn.btn-primary(type='button' onclick="addMoreMean()") Add Mean
         .modal-footer
           button.btn.btn-secondary(type='button' data-bs-dismiss='modal') Close
           button.btn.btn-primary(type='submit') Add

@@ -34,9 +34,28 @@ exports.getDetail = async (req, res, next) => {
     const { id } = req.params;
     const word = await wordService.getOne(id);
 
-    console.log(word);
-
     res.render('admin/word/update', { word });
+  } catch (error) {
+    next(error);
+  }
+}
+
+exports.updateWord = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    await wordService.updateWord(id, req.body);
+    res.redirect('back');
+  } catch (error) {
+    next(error);
+  }
+}
+
+exports.deleteMean = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const { meanId } = req.params;
+    await wordService.deleteMean(id, meanId);
+    res.redirect('back');
   } catch (error) {
     next(error);
   }

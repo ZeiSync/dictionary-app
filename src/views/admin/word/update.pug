@@ -1,28 +1,53 @@
 extends ../layout.pug
 
 block content
-  form(method="POST" action="/admin/word").px-5
-    #modal-body
-      .mb-3
-        label.form-label(for='word') Word
-        input#word.form-control(type='text' name='word' required value=word.word)
-      .mb-3
-        label.form-label(for='pronounce') Pronounce
-        input#pronounce.form-control(type='text' name="pronounce" required value=word.pronounce)
-      .mb-3
-        label.form-label(for='wordType') Word Type
-        select#wordType.form-select(name="type" value=word.type)
-          option(value="nouns" selected) Nouns
-          option(value="verbs") Verbs
-          option(value="adjectives") Adjectives
-          option(value="adverbs") Adverbs
-          option(value="pronouns") Pronouns
-          option(value="prepositions") prepositions
-          option(value="conjunctions") Conjunctions
-          option(value="interjections") Interjections
-      .mb-3
-        label.form-label(for='category' value=word.category) Category
-        select#category.form-select(name="category")
-          option(value="secure" selected) Secure
-          option(value="it") IT
-      button#addMean.btn.btn-primary(type='button' onclick="addMoreMean()") Update
+  .display-4.px-5.mb-3 Update word
+  form(method="POST" action="/admin/word/"+word._id).px-5
+    .d-flex.justify-content-evenly.bg-light.mb-3.border
+      .w-50.p-3
+        .mb-3
+          label.form-label(for='word') Word
+          input#word.form-control(type='text' name='word' required value=word.word)
+        .mb-3
+          label.form-label(for='wordType') Word Type
+          select#wordType.form-select(name="type" value=word.type)
+            option(value="nouns") Nouns
+            option(value="verbs") Verbs
+            option(value="adjectives") Adjectives
+            option(value="adverbs") Adverbs
+            option(value="pronouns") Pronouns
+            option(value="prepositions") prepositions
+            option(value="conjunctions") Conjunctions
+            option(value="interjections") Interjections
+      .w-50.p-3
+        .mb-3
+          label.form-label(for='pronounce') Pronounce
+          input#pronounce.form-control(type='text' name="pronounce" required value=word.pronounce)
+        .mb-3
+          label.form-label(for='category' value=word.category) Category
+          select#category.form-select(name="category")
+            option(value="secure" selected) Secure
+            option(value="it") IT
+    #addMean.d-flex.flex-wrap
+      each mean, idx in word.means
+        .border.w-50.p-3.bg-light
+          input.form-control(type='hidden' name='meanId['+idx+']' value=mean._id)
+          .mb-3
+            .d-flex.justify-content-between.align-items-start
+              label.form-label(for='mean['+idx+']') Mean #{idx + 1}
+              button(type="button" class="btn-close" aria-label="Close" onclick='deleteThisMean("'+ word._id +','+ mean._id +'")')
+            input.form-control(id='mean['+idx+']' type='text' name='mean['+idx+']' required value=mean.mean)
+          .mb-3
+            label.form-label(for='example['+idx+']') Example #{idx + 1}
+            input.form-control(id='example['+idx+']' type='text' name='example['+idx+']' required value=mean.example)
+          .mb-3
+            label.form-label(for='situation['+idx+']') Situation #{idx + 1}
+            input.form-control(id='situation['+idx+']' type='text' name='situation['+idx+']' required value=mean.situation)
+    hr
+    .d-flex.justify-content-between.mb-5
+      button.btn.btn-primary(type='button' onclick="addMoreMean()") Add Mean
+      div
+        button.btn.btn-danger.me-2(type='button' onclick="window.history.back()") Back
+        button.btn.btn-success(type='submit') Update
+block script
+  script(src='/assets/js/update-word.js' type='text/javascript')

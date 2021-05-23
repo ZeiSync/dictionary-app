@@ -9,10 +9,15 @@ router
 
 router
   .route('/:id')
-  .get(controllers.getDetail);
+  .get(controllers.getDetail)
+  .post(controllers.updateWord);
 
 router
   .route('/:id/delete')
   .get(controllers.delete);
+
+router
+  .route('/:id/delete-mean/:meanId')
+  .get(controllers.deleteMean);
 
 module.exports = router;
