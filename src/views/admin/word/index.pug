@@ -42,12 +42,33 @@ block content
             td.text-center(colspan='6') No data to show
   #newWordModal.modal.fade(tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true')
     .modal-dialog.modal-dialog-centered.modal-dialog-scrollable
-      .modal-content
+      form(method="POST" action="word/").modal-content
         .modal-header
           h5#exampleModalLabel.modal-title Add new word
           button.btn-close(type='button' data-bs-dismiss='modal' aria-label='Close')
         .modal-body
-          | ...
+            .mb-3
+              label.form-label(for='word') Word
+              input#word.form-control(type='text' name='word')
+            .mb-3
+              label.form-label(for='pronounce') Pronounce
+              input#pronounce.form-control(type='text' name="pronounce")
+            .mb-3
+              label.form-label(for='wordType') Word Type
+              select#wordType.form-select(name="type")
+                option(value="nouns" selected) Nouns
+                option(value="verbs") Verbs
+                option(value="adjectives") Adjectives
+                option(value="adverbs") Adverbs
+                option(value="pronouns") Pronouns
+                option(value="prepositions") prepositions
+                option(value="conjunctions") Conjunctions
+                option(value="interjections") Interjections
+            .mb-3
+              label.form-label(for='category') Category
+              select#category.form-select(name="category")
+                option(value="secure" selected) Secure
+                option(value="it") IT
         .modal-footer
           button.btn.btn-secondary(type='button' data-bs-dismiss='modal') Close
-          button.btn.btn-primary(type='button') Save changes
+          button.btn.btn-primary(type='submit') Add

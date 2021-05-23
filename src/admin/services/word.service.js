@@ -1,9 +1,14 @@
 const Word = require('../../models/word.model');
 
-exports.getAll = async () => {
+exports.getAll = async (option) => {
   try {
-    return await Word.find().lean();
+    if (option) {
+      return await Word.find({ word: `/${option}/` }).lean();
+    } else {
+      return await Word.find().lean();
+
+    }
   } catch (error) {
     return error;
   }
-}
+};
