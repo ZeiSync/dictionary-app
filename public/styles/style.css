@@ -1,0 +1,27 @@
+:root {
+  --wild-sand: #f6f5f5;
+  --botticelli: #d3e0ea;
+  --eastern-blue: #1687a7;
+  --calypso: #276678;
+}
+
+.btn:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+#home {
+  height: 90vh;
+}
+.bg-wild-sand {
+  background-color: var(--wild-sand);
+}
+.bg-botticelli {
+  background-color: var(--botticelli);
+}
+.bg-eastern-blue {
+  background-color: var(--eastern-blue);
+}
+.bg-calypso {
+  background-color: var(--calypso);
+}

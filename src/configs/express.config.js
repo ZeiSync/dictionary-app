@@ -5,14 +5,16 @@ const httpStatus = require('http-status');
 const passport = require('passport');
 
 const { adminStrategy } = require('./passport.config');
+const routes = require('../routes/index');
+const adminRoutes = require('../admin/routes/index');
 
 const app = express();
 
 exports.createApp = () => {
 
   app.set('view engine', 'pug');
-  app.set('views', path.join(__dirname, '../admin/views'));
-  app.use(express.static(path.join(__dirname, '../admin/public')));
+  app.set('views', path.join(__dirname, '../views'));
+  app.use(express.static(path.join(__dirname, '../../public')));
 
   app.use(express.json({ limit: '2mb' }));
   app.use(express.urlencoded({ extended: true, limit: '2mb' }));
@@ -25,7 +27,8 @@ exports.createApp = () => {
 
   passport.use('admin', adminStrategy);
 
-  app.get('/', (_, res) => res.status(httpStatus.OK).json('OK'));
+  app.use('/', routes);
+  app.use('/admin', adminRoutes);
 
   app.use('/healthcheck', (req, res, next) => res.status(httpStatus.OK).end());
 

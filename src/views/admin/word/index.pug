@@ -1,0 +1,53 @@
+extends ../layout.pug
+
+block content
+  .px-2
+    .d-flex.mb-2.justify-content-between
+      button.btn.btn-outline-primary(type='button' data-bs-toggle='modal' data-bs-target='#newWordModal') New Word
+      form(action="word/search" method="GET").d-flex
+        input.form-control.me-2(type='search' placeholder='Search' aria-label='Search' name="query" value=query)
+        button.btn.btn-outline-success.my-2.my-sm-0(type='submit') Search
+
+    table.table.table-hover 
+      thead
+        tr
+          th.text-center(scope='col') Word
+          th.text-center(scope='col') Type
+          th.text-center(scope='col') Category
+          th.text-center(scope='col') Pronounce
+          th.text-center(scope='col') Audio
+          th.text-center(scope='col') Action
+      tbody
+        if words && words.length
+          each word in words
+            tr
+              td.text-center 
+                | #{word.word}
+              td.text-center 
+                | #{word.type}
+              td.text-center 
+                | #{word.category}
+              td.text-center 
+                | #{word.pronounce}
+              if word.audio
+                td.text-center 
+                  audio(controls='')
+                    source(src=word.audio type='audio/mpeg')
+                    | Your browser does not support the audio element.
+              else
+                td.text-center
+                  | No Audio
+        else
+          tr.bg-light.bg-gradient
+            td.text-center(colspan='6') No data to show
+  #newWordModal.modal.fade(tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true')
+    .modal-dialog.modal-dialog-centered.modal-dialog-scrollable
+      .modal-content
+        .modal-header
+          h5#exampleModalLabel.modal-title Add new word
+          button.btn-close(type='button' data-bs-dismiss='modal' aria-label='Close')
+        .modal-body
+          | ...
+        .modal-footer
+          button.btn.btn-secondary(type='button' data-bs-dismiss='modal') Close
+          button.btn.btn-primary(type='button') Save changes
