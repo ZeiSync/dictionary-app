@@ -2,29 +2,61 @@ extends ../layout.pug
 
 block content
   .display-4.px-5.mb-3 Update user
+  .circular--landscape.ms-5
+    img(src=user.avatar)
   form(method="POST" action="/admin/user/"+user._id).px-5
     .d-flex.justify-content-evenly.bg-light.mb-3.border
       .w-50.p-3
         .mb-3
-          label.form-label(for='word') Word
-          input#word.form-control(type='text' name='word' required value=word.word)
+          label.form-label(for='user') User
+          input#user.form-control(type='text' name='name' required value=user.name)
         .mb-3
-          label.form-label(for='wordType') Word Type
-          select#wordType.form-select(name="type" value=word.type)
-            option(value="nouns") Nouns
-            option(value="verbs") Verbs
-            option(value="adjectives") Adjectives
-            option(value="adverbs") Adverbs
-            option(value="pronouns") Pronouns
-            option(value="prepositions") prepositions
-            option(value="conjunctions") Conjunctions
-            option(value="interjections") Interjections
+          label.form-label(for='city') City
+          input#city.form-control(type='text' name='city' value=user.city ? user.city : '' )
       .w-50.p-3
         .mb-3
-          label.form-label(for='pronounce') Pronounce
-          input#pronounce.form-control(type='text' name="pronounce" required value=word.pronounce)
+          label.form-label(for='email') Email
+          input#email.form-control(type='text' disabled readonly value=user.email)
         .mb-3
-          label.form-label(for='category' value=word.category) Category
-          select#category.form-select(name="category")
-            option(value="secure" selected) Secure
-            option(value="it") IT
+          label.form-label(for='phone') phone
+          input#phone.form-control(type='text' name="phone" value=user.phone ? user.phone : "")
+    table.table.table-hover 
+      thead
+        tr
+          th.text-center(scope='col') Word
+          th.text-center(scope='col') Pronounce
+          th.text-center(scope='col') Type
+          th.text-center(scope='col') Category
+          th.text-center(scope='col') Audio
+          th.text-center(scope='col') Action
+      tbody
+        if user.words && user.words.length
+          each word, i in user.words
+            tr
+              td.text-center.align-middle
+                | #{word.word}
+              td.text-center.align-middle
+                | #{word.pronounce}
+              td.text-center.align-middle
+                | #{word.type}
+              td.text-center.align-middle
+                | #{word.category}
+              if word.audio
+                td.text-center.align-middle
+                  audio(controls='')
+                    source(src=word.audio)
+                    | Your browser does not support the audio element.
+              else
+                td.text-center.align-middle
+                  | No Audio
+              td.text-center.align-middle
+                button(type="button" class="btn-close" aria-label="Close" onclick='removeWordFromList("'+ user._id +','+ word._id +'")')
+        else
+          tr.bg-light.bg-gradient
+            td.text-center(colspan='6') No data to show
+    hr
+    .d-flex.justify-content-end
+      button.btn.btn-danger.me-2(type='button' onclick="window.history.back()") Back
+      button.btn.btn-success(type='submit') Update
+block script
+  script(src='/assets/js/update-user.js' type='text/javascript')

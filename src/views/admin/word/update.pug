@@ -1,7 +1,6 @@
 extends ../layout.pug
 
 block content
-  div #{word.type}
   .display-4.px-5.mb-3 Update word
   form(method="POST" action="/admin/word/"+word._id).px-5
     .d-flex.justify-content-evenly.bg-light.mb-3.border

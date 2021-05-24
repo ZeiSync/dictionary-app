@@ -40,3 +40,14 @@ exports.updateUser = async (req, res, next) => {
     next(error);
   }
 }
+
+exports.removeWord = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const { wordId } = req.params;
+    await userService.removeWord(id, wordId);
+    res.redirect('back');
+  } catch (error) {
+    next(error);
+  }
+}

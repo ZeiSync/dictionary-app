@@ -21,6 +21,14 @@ exports.delete = async (id) => {
   }
 }
 
+exports.removeWord = async (id, wordId) => {
+  try {
+    await User.updateOne({ _id: id }, { $pull: { words: wordId } });
+  } catch (error) {
+    return error;
+  }
+}
+
 exports.getOne = async (id) => {
   try {
     return await User.findById(id).populate('words').lean();
@@ -31,8 +39,8 @@ exports.getOne = async (id) => {
 
 exports.updateUser = async (id, body) => {
   try {
-    console.log(id);
-    console.log(body);
+    const { name, city, phone } = body;
+    return await User.updateOne({ _id: id }, { name, city, phone });
   } catch (error) {
     return error;
   }

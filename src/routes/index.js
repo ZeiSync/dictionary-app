@@ -5,7 +5,6 @@ const router = require('express').Router();
 
 router.get('/', (_, res) => res.redirect('/home'));
 
-// router.use('/auth', require('./auth.route'));
 router.use('/home', require('./home.route'));
 
 module.exports = router;

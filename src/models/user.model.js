@@ -16,7 +16,10 @@ const userSchema = new Schema(
     password: String,
     phone: String,
     dob: String,
-    avatar: String,
+    avatar: {
+      type: String,
+      default: 'https://i.stack.imgur.com/l60Hf.pnghttps://i.stack.imgur.com/l60Hf.png'
+    },
     isAdmin: {
       type: Boolean,
       default: false,

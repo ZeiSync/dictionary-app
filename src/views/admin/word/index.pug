@@ -21,23 +21,23 @@ block content
         if words && words.length
           each word, i in words
             tr
-              td.text-center 
+              td.text-center.align-middle
                 | #{word.word}
-              td.text-center 
+              td.text-center.align-middle 
                 | #{word.pronounce}
-              td.text-center 
+              td.text-center.align-middle 
                 | #{word.type}
-              td.text-center 
+              td.text-center.align-middle 
                 | #{word.category}
               if word.audio
-                td.text-center
+                td.text-center.align-middle
                   audio(controls='')
                     source(src=word.audio)
                     | Your browser does not support the audio element.
               else
-                td.text-center
+                td.text-center.align-middle
                   | No Audio
-              td.text-center
+              td.text-center.align-middle
                 .dropdown
                   button.btn.btn-outline-secondary.dropdown-toggle(id="options"+i  type='button' data-bs-toggle='dropdown' aria-expanded='false')
                     | Action

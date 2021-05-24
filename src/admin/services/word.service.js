@@ -60,16 +60,14 @@ exports.deleteMean = async (id, meanId) => {
 
 exports.updateWord = async (id, body) => {
   try {
-    console.log(body);
     const { word, type, pronounce, category, meanId, mean, example, situation } = body;
-    await Word.updateOne({ _id: id }, { word, type, pronounce, category });
+    const audio = await getMp3Link(word);
+    await Word.updateOne({ _id: id }, { word, type, pronounce, category, audio });
 
     await Promise.all(mean.map(async (m, idx) => {
-      console.log(meanId[idx]);
       if (meanId[idx]) {
         await Mean.updateOne({ _id: meanId[idx], word: id, }, { mean: mean[idx], example: example[idx], situation: situation[idx] })
       } else {
-        console.log('DOESNT HAVE MEAN IDD')
         const newMean = await Mean.create({ mean: mean[idx], example: example[idx], situation: situation[idx], word: id })
         await Word.updateOne({ _id: id }, { $push: { means: newMean._id } })
       }

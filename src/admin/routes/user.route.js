@@ -15,4 +15,8 @@ router
   .route('/:id/delete')
   .get(controllers.delete);
 
+router
+  .route('/:id/delete-word/:wordId')
+  .get(controllers.removeWord);
+
 module.exports = router;

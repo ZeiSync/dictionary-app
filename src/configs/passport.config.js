@@ -1,23 +1,24 @@
 const passport = require('passport');
+const bcrypt = require('bcrypt');
 const LocalStrategy = require('passport-local').Strategy;
+
+const User = require('../models/user.model');
 
 passport.serializeUser((user, done) => {
   done(null, user.id);
 });
 
 passport.deserializeUser(async (id, done) => {
-  // const user = await AdminUser.findById(id);
-  const user = null;
+  const user = await User.findById(id).lean();
   return done(null, user);
 });
 
 const adminStrategyCallback = async (email, password, done) => {
-  const admin = null;
-  // const admin = await AdminUser.findOne({ email });
+  const admin = await User.findOne({ email, isAdmin: true }).lean();
   if (!admin) {
     return done(null, false, { message: 'Incorrect email.' });
   }
-  const isCorrectPassword = await admin.checkIsCorrectPassword({ password });
+  const isCorrectPassword = bcrypt.compareSync(password, admin.password);
   if (!isCorrectPassword) {
     return done(null, false, { message: 'Incorrect password.' });
   }

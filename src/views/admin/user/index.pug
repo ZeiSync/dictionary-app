@@ -18,17 +18,17 @@ block content
         if users && users.length
           each user, i in users
             tr
-              td.text-center 
+              td.text-center.align-middle
                 | #{user.name}
-              td.text-center 
+              td.text-center.align-middle
                 | #{user.email}
               if user.phone
-                td.text-center
+                td.text-center.align-middle
                   | #{user.phone}
               else
-                td.text-center
+                td.text-center.align-middle
                   | No Phone
-              td.text-center
+              td.text-center.align-middle
                 .dropdown
                   button.btn.btn-outline-secondary.dropdown-toggle(id="options"+i  type='button' data-bs-toggle='dropdown' aria-expanded='false')
                     | Action
