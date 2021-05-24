@@ -14,7 +14,6 @@ passport.deserializeUser((user, done) => {
 
 const adminStrategyCallback = async (email, password, done) => {
   const admin = await User.findOne({ email }).lean();
-  console.log('admin', admin);
   if (!admin) {
     return done(null, false, { message: 'Incorrect email.' });
   }

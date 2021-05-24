@@ -18,7 +18,6 @@ exports.getAll = async (req, res, next) => {
     const options = {};
     if (query) options.word = { $regex: query, $options: "i" }
     if (category === 'secure' || category === 'it') options.category = category;
-    console.log(options);
     const data = await wordService.getAll(options, +limit);
 
     return res.status(data.statusCode || httpStatus.OK).json(data);
