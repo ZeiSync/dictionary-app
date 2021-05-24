@@ -1,0 +1,24 @@
+doctype html
+html(lang="en")
+  head
+    title Dictionary-app
+    meta(charset='utf-8')
+    meta(name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no')
+    link(href='https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap' rel='stylesheet')
+    link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css' referrerpolicy='no-referrer')
+    link(href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x' crossorigin='anonymous')
+  body.bg-light
+    section(style="height: 100vh").d-flex.justify-content-center.align-items-center
+      .bg-secondary.bg-gradient.rounded
+        .login-wrap.p-4.p-md-5
+          h3.text-center.mb-5.text-light Sign In
+          form.login-form.d-flex.align-items-center.flex-column(method="POST" action="/admin/auth/login")
+            .form-group.mb-3
+              input.form-control.rounded-left(type='email' name="email" placeholder='Email' required)
+            .form-group.mb-3
+              input.form-control.rounded-left(type='password' name="password" placeholder='Password' required)
+            .form-group.mb-3
+              button.form-control.btn.btn-primary.rounded.submit.px-3(type='submit') Login
+    block script
+    script(src='https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js' integrity='sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4' crossorigin='anonymous')
+

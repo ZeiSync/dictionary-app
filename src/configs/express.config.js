@@ -22,7 +22,6 @@ exports.createApp = () => {
   app.use(express.json({ limit: '2mb' }));
   app.use(express.urlencoded({ extended: true, limit: '2mb' }));
 
-  console.log(mongoUri);
   app.use(cors());
   app.use(
     session({
@@ -39,7 +38,8 @@ exports.createApp = () => {
   app.use(passport.session());
   passport.use('admin', adminStrategy);
 
-  app.use('/', routes);
+  app.get('/', (_, res) => res.redirect('/admin'));
+  app.use('/api', routes);
   app.use('/admin', adminRoutes);
 
   app.use('/healthcheck', (req, res, next) => res.status(httpStatus.OK).end());
