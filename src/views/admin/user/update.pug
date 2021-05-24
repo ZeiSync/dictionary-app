@@ -2,8 +2,9 @@ extends ../layout.pug
 
 block content
   .display-4.px-5.mb-3 Update user
-  .circular--landscape.ms-5
-    img(src=user.avatar)
+  if user.avatar
+    .circular--landscape.ms-5
+      img(src=user.avatar)
   form(method="POST" action="/admin/user/"+user._id).px-5
     .d-flex.justify-content-evenly.bg-light.mb-3.border
       .w-50.p-3
