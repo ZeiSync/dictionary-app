@@ -1,6 +1,7 @@
 extends ../layout.pug
 
 block content
+  div #{word.type}
   .display-4.px-5.mb-3 Update word
   form(method="POST" action="/admin/word/"+word._id).px-5
     .d-flex.justify-content-evenly.bg-light.mb-3.border
@@ -11,23 +12,23 @@ block content
         .mb-3
           label.form-label(for='wordType') Word Type
           select#wordType.form-select(name="type" value=word.type)
-            option(value="nouns") Nouns
-            option(value="verbs") Verbs
-            option(value="adjectives") Adjectives
-            option(value="adverbs") Adverbs
-            option(value="pronouns") Pronouns
-            option(value="prepositions") prepositions
-            option(value="conjunctions") Conjunctions
-            option(value="interjections") Interjections
+            option(value="nouns" selected=(word.type === 'nouns') ? true : false ) Nouns
+            option(value="verbs" selected=(word.type === 'verbs') ? true : false ) Verbs
+            option(value="adjectives" selected=(word.type === 'adjectives') ? true : false ) Adjectives
+            option(value="adverbs" selected=(word.type === 'adverbs') ? true : false ) Adverbs
+            option(value="pronouns" selected=(word.type === 'pronouns') ? true : false ) Pronouns
+            option(value="prepositions" selected=(word.type === 'prepositions') ? true : false ) prepositions
+            option(value="conjunctions" selected=(word.type === 'conjunctions') ? true : false ) Conjunctions
+            option(value="interjections" selected=(word.type === 'interjections') ? true : false ) Interjections
       .w-50.p-3
         .mb-3
           label.form-label(for='pronounce') Pronounce
           input#pronounce.form-control(type='text' name="pronounce" required value=word.pronounce)
         .mb-3
-          label.form-label(for='category' value=word.category) Category
-          select#category.form-select(name="category")
-            option(value="secure" selected) Secure
-            option(value="it") IT
+          label.form-label(for='category') Category
+          select#category.form-select(name="category" value=word.category)
+            option(value="secure" selected=(word.category === 'secure') ? true : false) Secure
+            option(value="it" selected=(word.category === 'it') ? true : false ) IT
     #addMean.d-flex.flex-wrap
       each mean, idx in word.means
         .border.w-50.p-3.bg-light
