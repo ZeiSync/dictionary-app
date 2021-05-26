@@ -1,5 +1,4 @@
 require('dotenv').config()
-
 const { mongoose, expressInstance } = require('./src/configs');
 
 mongoose
