@@ -1,6 +1,5 @@
 const httpStatus = require('http-status');
 
-const adminUserService = require('../admin/services/user.service');
 const userService = require('../services/user.service');
 
 exports.getUserInfor = async (req, res, next) => {
@@ -17,7 +16,7 @@ exports.updateUserInfor = async (req, res, next) => {
   try {
     const user = req.user;
 
-    await adminUserService.updateUser(user._id, req.body);
+    await userService.updateUser(user._id, req.body, user);
 
     return res.status(httpStatus.OK).end();
   } catch (error) {

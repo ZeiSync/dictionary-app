@@ -8,16 +8,16 @@ router
   .get(AuthMiddleware.auth(), controllers.getUserInfor);
 
 router
-  .router('/update')
+  .route('/update')
   .put(AuthMiddleware.auth(), controllers.updateUserInfor);
 
 router
-  .router('/add/:id')
+  .route('/add/:id')
   .get(AuthMiddleware.auth(), controllers.addWordToUser);
 
 router
-  .router('/remove/:id')
-  .get(AuthMiddleware.auth(), controllers.removeWord);
+  .route('/remove/:id')
+  .get(AuthMiddleware.auth(), controllers.removeWordToUser);
 
 
 module.exports = router;
